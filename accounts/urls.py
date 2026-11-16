@@ -25,4 +25,14 @@ urlpatterns = [
         views.signup_success,
         name="signup_success"
     ),
+    path(
+        "login/",
+        views.login_user,
+        name="login"
+    ),
+    path(
+        "logout/",
+        views.logout_user,
+        name="logout"
+    ),
 ]

@@ -95,3 +95,29 @@ class SignupForm(forms.Form):
             )
 
         return cleaned
+
+
+class LoginForm(forms.Form):
+    email = forms.EmailField(
+        max_length=255,
+        widget=forms.EmailInput(
+            attrs={
+                "class": "auth-input",
+                "placeholder": "Email address",
+                "autocomplete": "email",
+            }
+        ),
+    )
+
+    password = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={
+                "class": "auth-input",
+                "placeholder": "Password",
+                "autocomplete": "current-password",
+            }
+        ),
+    )
+
+    def clean_email(self):
+        return self.cleaned_data["email"].strip().lower()

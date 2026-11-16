@@ -50,14 +50,20 @@
             </p>
 
             <p class="auth-subtitle">
-                Sign-in functionality will be added in the next
-                development stage.
+                You can now sign in using your email address
+                and password.
             </p>
 
-            <a href="{% url 'home' %}" class="auth-submit">
-                <span>Return to Homepage</span>
+            <a href="{% url 'login' %}" class="auth-submit">
+                <span>Sign In to MealMate</span>
                 <i class="fa-solid fa-arrow-right"></i>
             </a>
+
+            <div class="auth-switch">
+                <a href="{% url 'home' %}">
+                    Return to Homepage
+                </a>
+            </div>
 
         </section>
 

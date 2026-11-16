@@ -1,5 +1,5 @@
 
-from django.contrib.auth.hashers import check_password
+from django.contrib.auth.hashers import check_password, make_password
 from django.test import TestCase
 from django.urls import reverse
 
@@ -172,4 +172,186 @@ class RegistrationTests(TestCase):
         self.assertNotIn(
             "user_id",
             self.client.session
+        )
+
+
+class LoginTests(TestCase):
+    def setUp(self):
+        self.user = MealMateUser.objects.create(
+            full_name="Test Customer",
+            email="customer@example.com",
+            password_hash=make_password("SecurePass123!"),
+            role="user",
+            is_active=True,
+        )
+
+    def test_login_page_loads(self):
+        response = self.client.get(
+            reverse("login")
+        )
+
+        self.assertEqual(
+            response.status_code,
+            200
+        )
+
+        self.assertTemplateUsed(
+            response,
+            "login.html"
+        )
+
+    def test_user_can_log_in(self):
+        response = self.client.post(
+            reverse("login"),
+            {
+                "email": "customer@example.com",
+                "password": "SecurePass123!",
+            }
+        )
+
+        self.assertRedirects(
+            response,
+            reverse("home")
+        )
+
+        self.assertEqual(
+            self.client.session["user_id"],
+            self.user.id
+        )
+
+        self.assertEqual(
+            self.client.session["user_role"],
+            "user"
+        )
+
+    def test_business_can_log_in(self):
+        self.user.role = "business"
+        self.user.save(update_fields=["role"])
+
+        response = self.client.post(
+            reverse("login"),
+            {
+                "email": "customer@example.com",
+                "password": "SecurePass123!",
+            }
+        )
+
+        self.assertRedirects(
+            response,
+            reverse("home")
+        )
+
+        self.assertEqual(
+            self.client.session["user_role"],
+            "business"
+        )
+
+    def test_incorrect_password_is_rejected(self):
+        response = self.client.post(
+            reverse("login"),
+            {
+                "email": "customer@example.com",
+                "password": "IncorrectPassword!",
+            }
+        )
+
+        self.assertContains(
+            response,
+            "Incorrect email or password."
+        )
+
+        self.assertNotIn(
+            "user_id",
+            self.client.session
+        )
+
+    def test_inactive_account_is_rejected(self):
+        self.user.is_active = False
+        self.user.save(update_fields=["is_active"])
+
+        response = self.client.post(
+            reverse("login"),
+            {
+                "email": "customer@example.com",
+                "password": "SecurePass123!",
+            }
+        )
+
+        self.assertContains(
+            response,
+            "This account is inactive."
+        )
+
+        self.assertNotIn(
+            "user_id",
+            self.client.session
+        )
+
+    def test_homepage_displays_logged_in_user(self):
+        self.client.post(
+            reverse("login"),
+            {
+                "email": "customer@example.com",
+                "password": "SecurePass123!",
+            }
+        )
+
+        response = self.client.get(
+            reverse("home")
+        )
+
+        self.assertContains(
+            response,
+            "Test Customer"
+        )
+
+        self.assertContains(
+            response,
+            "Log Out"
+        )
+
+    def test_logout_clears_session(self):
+        self.client.post(
+            reverse("login"),
+            {
+                "email": "customer@example.com",
+                "password": "SecurePass123!",
+            }
+        )
+
+        response = self.client.post(
+            reverse("logout")
+        )
+
+        self.assertRedirects(
+            response,
+            reverse("home")
+        )
+
+        self.assertNotIn(
+            "user_id",
+            self.client.session
+        )
+
+    def test_logout_requires_post(self):
+        self.client.post(
+            reverse("login"),
+            {
+                "email": "customer@example.com",
+                "password": "SecurePass123!",
+            }
+        )
+
+        response = self.client.get(
+            reverse("logout")
+        )
+
+        self.assertEqual(
+            response.status_code,
+            405
+        )
+
+        self.assertEqual(
+            self.client.session["user_id"],
+            self.user.id
         )
