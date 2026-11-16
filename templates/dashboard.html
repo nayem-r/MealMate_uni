@@ -1,0 +1,170 @@
+
+{% extends 'app_base.html' %}
+
+{% block title %}
+Find Food | MealMate
+{% endblock %}
+
+{% block food_nav_class %}
+dashboard-active-link
+{% endblock %}
+
+{% block content %}
+
+<main class="user-dashboard">
+
+    <section class="dashboard-welcome">
+
+        <p class="dashboard-label">
+            MEALMATE
+        </p>
+
+        <h1>
+            Welcome, {{ current_user.full_name }}
+        </h1>
+
+        <p>
+            Find surplus food shared by restaurants
+            and businesses in your community.
+        </p>
+
+    </section>
+
+    <section class="dashboard-introduction">
+
+        <div class="dashboard-intro-content">
+
+            <span class="dashboard-intro-tag">
+                <i class="fa-solid fa-leaf"></i>
+                GOOD FOOD. BRIGHTER TOMORROWS.
+            </span>
+
+            <h2>
+                Discover Good Food.
+                <span>Make a Difference.</span>
+            </h2>
+
+            <p>
+                MealMate connects you with local food businesses
+                to help reduce food waste and support
+                your community.
+            </p>
+
+        </div>
+
+        <div class="dashboard-intro-icon">
+            <i class="fa-solid fa-hand-holding-heart"></i>
+        </div>
+
+    </section>
+
+    <section class="dashboard-overview">
+
+        <div class="results-heading-row">
+
+            <div>
+                <p class="dashboard-label">
+                    YOUR FOOD COMMUNITY
+                </p>
+
+                <h2>Find Food</h2>
+            </div>
+
+            <span class="dashboard-stage-label">
+                Food Seeker Dashboard
+            </span>
+
+        </div>
+
+        <div class="dashboard-overview-grid">
+
+            <article class="overview-card">
+
+                <div class="overview-icon">
+                    <i class="fa-solid fa-store"></i>
+                </div>
+
+                <h3>Local Businesses</h3>
+
+                <p>
+                    Discover surplus food shared by
+                    restaurants, cafés and local businesses.
+                </p>
+
+            </article>
+
+            <article class="overview-card">
+
+                <div class="overview-icon overview-icon-blue">
+                    <i class="fa-solid fa-basket-shopping"></i>
+                </div>
+
+                <h3>Food Reservations</h3>
+
+                <p>
+                    Reserve available food and collect
+                    it during the designated pickup window.
+                </p>
+
+            </article>
+
+            <article class="overview-card">
+
+                <div class="overview-icon overview-icon-orange">
+                    <i class="fa-solid fa-seedling"></i>
+                </div>
+
+                <h3>Reduce Food Waste</h3>
+
+                <p>
+                    Help good food reach people
+                    instead of going to waste.
+                </p>
+
+            </article>
+
+        </div>
+
+    </section>
+
+    <section class="dashboard-food-section">
+
+        <div class="results-heading-row">
+
+            <div>
+                <p class="dashboard-label">
+                    AVAILABLE NOW
+                </p>
+
+                <h2>Food Marketplace</h2>
+            </div>
+
+        </div>
+
+        <div class="food-grid">
+
+            <div class="no-food-message">
+
+                <div class="no-food-icon">
+                    <i class="fa-solid fa-basket-shopping"></i>
+                </div>
+
+                <h3>
+                    Food Discovery
+                </h3>
+
+                <p>
+                    Available food listings will appear here
+                    when businesses begin sharing their
+                    surplus food on MealMate.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+{% endblock %}
