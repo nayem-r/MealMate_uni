@@ -17,30 +17,15 @@ class RegistrationTests(TestCase):
         }
 
     def test_user_registration_page(self):
-        response = self.client.get(
-            reverse("signup_user")
-        )
+        response = self.client.get(reverse("signup_user"))
 
-        self.assertEqual(
-            response.status_code,
-            200
-        )
-
-        self.assertTemplateUsed(
-            response,
-            "signup.html"
-        )
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "signup.html")
 
     def test_business_registration_page(self):
-        response = self.client.get(
-            reverse("signup_business")
-        )
+        response = self.client.get(reverse("signup_business"))
 
-        self.assertEqual(
-            response.status_code,
-            200
-        )
-
+        self.assertEqual(response.status_code, 200)
         self.assertContains(
             response,
             "Create a business account"
@@ -61,11 +46,7 @@ class RegistrationTests(TestCase):
             email="customer@example.com"
         )
 
-        self.assertEqual(
-            user.role,
-            "user"
-        )
-
+        self.assertEqual(user.role, "user")
         self.assertTrue(
             check_password(
                 "SecurePass123!",
@@ -80,7 +61,6 @@ class RegistrationTests(TestCase):
 
     def test_business_registration(self):
         data = self.valid_data.copy()
-
         data["full_name"] = "Test Restaurant"
         data["email"] = "business@example.com"
 
@@ -98,10 +78,7 @@ class RegistrationTests(TestCase):
             email="business@example.com"
         )
 
-        self.assertEqual(
-            business.role,
-            "business"
-        )
+        self.assertEqual(business.role, "business")
 
     def test_duplicate_email(self):
         self.client.post(
@@ -185,23 +162,8 @@ class LoginTests(TestCase):
             is_active=True,
         )
 
-    def test_login_page_loads(self):
-        response = self.client.get(
-            reverse("login")
-        )
-
-        self.assertEqual(
-            response.status_code,
-            200
-        )
-
-        self.assertTemplateUsed(
-            response,
-            "login.html"
-        )
-
-    def test_user_can_log_in(self):
-        response = self.client.post(
+    def login(self):
+        return self.client.post(
             reverse("login"),
             {
                 "email": "customer@example.com",
@@ -209,9 +171,18 @@ class LoginTests(TestCase):
             }
         )
 
+    def test_login_page_loads(self):
+        response = self.client.get(reverse("login"))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "login.html")
+
+    def test_user_can_log_in(self):
+        response = self.login()
+
         self.assertRedirects(
             response,
-            reverse("home")
+            reverse("dashboard")
         )
 
         self.assertEqual(
@@ -228,13 +199,7 @@ class LoginTests(TestCase):
         self.user.role = "business"
         self.user.save(update_fields=["role"])
 
-        response = self.client.post(
-            reverse("login"),
-            {
-                "email": "customer@example.com",
-                "password": "SecurePass123!",
-            }
-        )
+        response = self.login()
 
         self.assertRedirects(
             response,
@@ -269,13 +234,7 @@ class LoginTests(TestCase):
         self.user.is_active = False
         self.user.save(update_fields=["is_active"])
 
-        response = self.client.post(
-            reverse("login"),
-            {
-                "email": "customer@example.com",
-                "password": "SecurePass123!",
-            }
-        )
+        response = self.login()
 
         self.assertContains(
             response,
@@ -288,40 +247,17 @@ class LoginTests(TestCase):
         )
 
     def test_homepage_displays_logged_in_user(self):
-        self.client.post(
-            reverse("login"),
-            {
-                "email": "customer@example.com",
-                "password": "SecurePass123!",
-            }
-        )
+        self.login()
 
-        response = self.client.get(
-            reverse("home")
-        )
+        response = self.client.get(reverse("home"))
 
-        self.assertContains(
-            response,
-            "Test Customer"
-        )
-
-        self.assertContains(
-            response,
-            "Log Out"
-        )
+        self.assertContains(response, "Test Customer")
+        self.assertContains(response, "Log Out")
 
     def test_logout_clears_session(self):
-        self.client.post(
-            reverse("login"),
-            {
-                "email": "customer@example.com",
-                "password": "SecurePass123!",
-            }
-        )
+        self.login()
 
-        response = self.client.post(
-            reverse("logout")
-        )
+        response = self.client.post(reverse("logout"))
 
         self.assertRedirects(
             response,
@@ -334,24 +270,95 @@ class LoginTests(TestCase):
         )
 
     def test_logout_requires_post(self):
+        self.login()
+
+        response = self.client.get(reverse("logout"))
+
+        self.assertEqual(response.status_code, 405)
+        self.assertEqual(
+            self.client.session["user_id"],
+            self.user.id
+        )
+
+
+class FoodSeekerDashboardTests(TestCase):
+    def setUp(self):
+        self.user = MealMateUser.objects.create(
+            full_name="Food Seeker",
+            email="seeker@example.com",
+            password_hash=make_password("SecurePass123!"),
+            role="user",
+            is_active=True,
+        )
+
+        self.business = MealMateUser.objects.create(
+            full_name="Test Restaurant",
+            email="business@example.com",
+            password_hash=make_password("SecurePass123!"),
+            role="business",
+            is_active=True,
+        )
+
+    def test_dashboard_requires_login(self):
+        response = self.client.get(
+            reverse("dashboard")
+        )
+
+        self.assertRedirects(
+            response,
+            reverse("login")
+        )
+
+    def test_food_seeker_can_access_dashboard(self):
         self.client.post(
             reverse("login"),
             {
-                "email": "customer@example.com",
+                "email": "seeker@example.com",
                 "password": "SecurePass123!",
             }
         )
 
         response = self.client.get(
-            reverse("logout")
+            reverse("dashboard")
         )
 
-        self.assertEqual(
-            response.status_code,
-            405
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "dashboard.html")
+        self.assertContains(response, "Welcome, Food Seeker")
+        self.assertContains(response, "Food Marketplace")
+
+    def test_business_cannot_access_food_seeker_dashboard(self):
+        self.client.post(
+            reverse("login"),
+            {
+                "email": "business@example.com",
+                "password": "SecurePass123!",
+            }
         )
 
-        self.assertEqual(
-            self.client.session["user_id"],
-            self.user.id
+        response = self.client.get(
+            reverse("dashboard")
+        )
+
+        self.assertRedirects(
+            response,
+            reverse("home")
+        )
+
+    def test_logged_in_food_seeker_is_redirected_to_dashboard(self):
+        self.client.post(
+            reverse("login"),
+            {
+                "email": "seeker@example.com",
+                "password": "SecurePass123!",
+            }
+        )
+
+        response = self.client.get(
+            reverse("login")
+        )
+
+        self.assertRedirects(
+            response,
+            reverse("dashboard")
         )

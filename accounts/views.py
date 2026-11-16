@@ -10,7 +10,6 @@ from .models import MealMateUser
 
 def create_login_session(request, user):
     request.session.cycle_key()
-
     request.session["user_id"] = user.id
     request.session["user_name"] = user.full_name
     request.session["user_email"] = user.email
@@ -46,17 +45,11 @@ def home(request):
 
 
 def signup_user(request):
-    return _signup(
-        request,
-        role="user"
-    )
+    return _signup(request, role="user")
 
 
 def signup_business(request):
-    return _signup(
-        request,
-        role="business"
-    )
+    return _signup(request, role="business")
 
 
 def _signup(request, role):
@@ -99,16 +92,16 @@ def _signup(request, role):
 
 
 def signup_success(request):
-    return render(
-        request,
-        "signup_success.html"
-    )
+    return render(request, "signup_success.html")
 
 
 def login_user(request):
     current_user = get_current_user(request)
 
     if current_user:
+        if current_user.role == "user":
+            return redirect("dashboard")
+
         return redirect("home")
 
     form = LoginForm(
@@ -130,15 +123,15 @@ def login_user(request):
                     "This account is inactive."
                 )
             else:
-                create_login_session(
-                    request,
-                    user
-                )
+                create_login_session(request, user)
 
                 messages.success(
                     request,
                     "You have signed in successfully."
                 )
+
+                if user.role == "user":
+                    return redirect("dashboard")
 
                 return redirect("home")
         else:
@@ -159,5 +152,22 @@ def login_user(request):
 @require_POST
 def logout_user(request):
     request.session.flush()
-
     return redirect("home")
+
+
+def dashboard(request):
+    current_user = get_current_user(request)
+
+    if not current_user:
+        return redirect("login")
+
+    if current_user.role != "user":
+        return redirect("home")
+
+    return render(
+        request,
+        "dashboard.html",
+        {
+            "current_user": current_user
+        }
+    )

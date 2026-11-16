@@ -35,4 +35,9 @@ urlpatterns = [
         views.logout_user,
         name="logout"
     ),
+    path(
+        "dashboard/",
+        views.dashboard,
+        name="dashboard"
+    ),
 ]
