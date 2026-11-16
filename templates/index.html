@@ -1,0 +1,767 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MealMate | Good Food Should Be Shared</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    >
+
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body class="intro-active">
+
+    <div class="logo-intro" id="logoIntro">
+        <div class="intro-logo" id="introLogo">
+            <div class="intro-logo-icon" id="introLogoIcon">
+                <i class="fa-solid fa-leaf"></i>
+            </div>
+
+            <div class="intro-logo-text">
+                <span class="intro-brand-name intro-letters">
+                    <span class="intro-letter meal-letter" data-intro-letter="0" style="--i:0;">M</span>
+                    <span class="intro-letter meal-letter" data-intro-letter="1" style="--i:1;">e</span>
+                    <span class="intro-letter meal-letter" data-intro-letter="2" style="--i:2;">a</span>
+                    <span class="intro-letter meal-letter" data-intro-letter="3" style="--i:3;">l</span>
+                    <span class="intro-letter mate-letter" data-intro-letter="4" style="--i:4;">M</span>
+                    <span class="intro-letter mate-letter" data-intro-letter="5" style="--i:5;">a</span>
+                    <span class="intro-letter mate-letter" data-intro-letter="6" style="--i:6;">t</span>
+                    <span class="intro-letter mate-letter" data-intro-letter="7" style="--i:7;">e</span>
+                </span>
+
+                <small id="introTagline">
+                    Good Food. Brighter Tomorrows.
+                </small>
+            </div>
+        </div>
+    </div>
+
+    <header class="site-header">
+        <nav class="navbar">
+
+            <a href="#find-food" class="brand" id="navbarBrand">
+                <div class="brand-icon" id="targetLogoIcon">
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
+
+                <div class="brand-text">
+                    <span class="brand-name target-letters">
+                        <span class="target-letter target-meal" data-target-letter="0">M</span>
+                        <span class="target-letter target-meal" data-target-letter="1">e</span>
+                        <span class="target-letter target-meal" data-target-letter="2">a</span>
+                        <span class="target-letter target-meal" data-target-letter="3">l</span>
+                        <span class="target-letter target-mate" data-target-letter="4">M</span>
+                        <span class="target-letter target-mate" data-target-letter="5">a</span>
+                        <span class="target-letter target-mate" data-target-letter="6">t</span>
+                        <span class="target-letter target-mate" data-target-letter="7">e</span>
+                    </span>
+
+                    <small id="targetTagline">
+                        Good Food. Brighter Tomorrows.
+                    </small>
+                </div>
+            </a>
+
+            <div class="desktop-nav navbar-reveal">
+                <a href="#services">Our Services</a>
+                <a href="#about">About Us</a>
+            </div>
+
+            <div class="account-wrapper navbar-reveal">
+                <button class="account-button" id="accountButton" type="button">
+                    <i class="fa-solid fa-user"></i>
+                    <span>Account / Profile</span>
+                    <i class="fa-solid fa-chevron-down arrow" id="accountArrow"></i>
+                </button>
+
+                <div class="account-dropdown" id="accountDropdown">
+                    <div class="dropdown-heading">
+                        <strong>Welcome to MealMate</strong>
+                        <p>
+                            Account registration and sign-in
+                            will be introduced in the next stages.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <button
+                class="mobile-menu-button navbar-reveal"
+                id="mobileMenuButton"
+                type="button"
+                aria-label="Open menu"
+                aria-expanded="false"
+            >
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+        </nav>
+
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#services">Our Services</a>
+            <a href="#about">About Us</a>
+            <a href="#find-food">Home</a>
+        </div>
+    </header>
+
+    <main>
+
+        <section class="hero" id="find-food">
+            <div class="hero-content">
+
+                <div class="hero-text">
+
+                    <h1 class="sequence-reveal" id="heroTitleReveal">
+                        <span class="hero-title-line" id="heroMainTitle">
+                            Good Food
+                        </span>
+
+                        <span class="changing-text" id="changingHeroText">
+                            Should Be Shared
+                        </span>
+                    </h1>
+
+                    <span class="eyebrow sequence-reveal" id="heroEyebrowReveal">
+                        LESS FOOD WASTE. STRONGER COMMUNITIES.
+                    </span>
+
+                    <p class="hero-description sequence-reveal" id="heroDescriptionReveal">
+                        MealMate connects people with surplus food from local
+                        restaurants, cafés and businesses — reducing waste,
+                        feeding communities, and building a more sustainable
+                        tomorrow.
+                    </p>
+
+                    <div class="hero-buttons sequence-reveal" id="heroButtonsReveal">
+                        <a href="#services" class="primary-button">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <span>Explore MealMate</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="hero-visual sequence-reveal" id="heroPictureReveal">
+                    <div class="hero-image-wrapper">
+                        <img
+                            src="{% static 'images/mealmate-hero.png' %}"
+                            alt="Customer collecting surplus food from a local restaurant"
+                            class="hero-image"
+                        >
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="intentions-section" id="services">
+
+            <div class="section-heading">
+                <span class="scroll-reveal">
+                    OUR INTENTIONS
+                </span>
+
+                <h2 class="scroll-reveal">
+                    A Fairer, Greener Food System
+                </h2>
+
+                <p class="scroll-reveal">
+                    We believe good food should never go to waste.
+                    MealMate makes surplus food easier to share while
+                    helping businesses reduce waste and support their
+                    local community.
+                </p>
+            </div>
+
+            <div class="intention-grid">
+
+                <article class="info-card scroll-reveal">
+                    <div class="info-icon community">
+                        <i class="fa-solid fa-user-group"></i>
+                    </div>
+
+                    <div>
+                        <h3>Our Intentions</h3>
+                        <p>
+                            To create a community where good food is
+                            shared, not wasted.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="info-card scroll-reveal">
+                    <div class="info-icon target">
+                        <i class="fa-solid fa-bullseye"></i>
+                    </div>
+
+                    <div>
+                        <h3>Our Objectives</h3>
+                        <p>
+                            Reduce food waste, support local communities,
+                            and make food more accessible.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="info-card scroll-reveal">
+                    <div class="info-icon impact">
+                        <i class="fa-solid fa-leaf"></i>
+                    </div>
+
+                    <div>
+                        <h3>Lasting Impact</h3>
+                        <p>
+                            A cleaner environment, stronger communities,
+                            and a more sustainable future.
+                        </p>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <section class="how-section" id="available-food">
+
+            <div class="how-container">
+
+                <div class="how-heading">
+                    <span class="scroll-reveal">
+                        HOW IT WORKS
+                    </span>
+
+                    <h2 class="scroll-reveal">
+                        Simple Steps. <strong>Real Impact.</strong>
+                    </h2>
+                </div>
+
+                <div class="steps">
+
+                    <article class="step-card scroll-reveal">
+                        <span class="step-number">1</span>
+
+                        <div class="step-icon">
+                            <i class="fa-solid fa-store"></i>
+                        </div>
+
+                        <h3>Businesses Share Food</h3>
+
+                        <p>
+                            Restaurants, cafés and local businesses post
+                            safe surplus food they have available.
+                        </p>
+                    </article>
+
+                    <div class="step-arrow scroll-reveal">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+
+                    <article class="step-card scroll-reveal">
+                        <span class="step-number blue">2</span>
+
+                        <div class="step-icon blue-icon">
+                            <i class="fa-solid fa-magnifying-glass-location"></i>
+                        </div>
+
+                        <h3>Find &amp; Reserve</h3>
+
+                        <p>
+                            Users browse available food, see pickup
+                            details, and reserve a portion.
+                        </p>
+                    </article>
+
+                    <div class="step-arrow scroll-reveal">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+
+                    <article class="step-card scroll-reveal">
+                        <span class="step-number orange-number">3</span>
+
+                        <div class="step-icon orange-icon">
+                            <i class="fa-solid fa-hand-holding-heart"></i>
+                        </div>
+
+                        <h3>Collect &amp; Enjoy</h3>
+
+                        <p>
+                            Open Google Maps directions, collect during
+                            the pickup window, and help good food find
+                            a second home.
+                        </p>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="about-section" id="about">
+
+            <div class="about-container">
+
+                <div class="about-copy">
+
+                    <span class="section-tag scroll-reveal">
+                        ABOUT US
+                    </span>
+
+                    <h2 class="scroll-reveal">
+                        Sharing Food. Supporting People.
+                    </h2>
+
+                    <p class="scroll-reveal">
+                        MealMate connects people with restaurants,
+                        cafés and businesses that have safe surplus
+                        food available.
+                    </p>
+
+                    <p class="scroll-reveal">
+                        Instead of throwing good food away,
+                        businesses can make it available to
+                        their local community.
+                    </p>
+
+                    <div class="about-stat-grid">
+
+                        <div class="about-stat scroll-reveal">
+                            <strong>Less Waste</strong>
+                            <span>
+                                Food reaches people instead of bins.
+                            </span>
+                        </div>
+
+                        <div class="about-stat scroll-reveal">
+                            <strong>More Access</strong>
+                            <span>
+                                Users can discover and reserve food nearby.
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="contact-card scroll-reveal">
+
+                    <span class="section-tag">
+                        CONTACT
+                    </span>
+
+                    <h3>Get In Touch</h3>
+
+                    <p>
+                        Have a question, partnership idea or want to join
+                        the platform? Contact our team.
+                    </p>
+
+                    <a href="mailto:hello@mealmate.com">
+                        <i class="fa-solid fa-envelope"></i>
+                        <span>hello@mealmate.com</span>
+                    </a>
+
+                    <div class="contact-item">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span>United Kingdom</span>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+
+        <div class="footer-brand scroll-reveal">
+            <i class="fa-solid fa-leaf"></i>
+            <strong>MealMate</strong>
+        </div>
+
+        <p class="scroll-reveal">
+            Good food deserves a second chance.
+        </p>
+
+        <span class="scroll-reveal">
+            © 2026 MealMate
+        </span>
+
+    </footer>
+
+    <script>
+        const accountButton = document.getElementById("accountButton");
+        const accountDropdown = document.getElementById("accountDropdown");
+        const mobileMenuButton = document.getElementById("mobileMenuButton");
+        const mobileMenu = document.getElementById("mobileMenu");
+
+        if (accountButton && accountDropdown) {
+            accountButton.addEventListener("click", (event) => {
+                event.stopPropagation();
+
+                const isOpen = accountDropdown.classList.toggle("show");
+                accountButton.classList.toggle("active", isOpen);
+                accountButton.setAttribute("aria-expanded", String(isOpen));
+            });
+
+            document.addEventListener("click", (event) => {
+                if (!accountDropdown.contains(event.target) &&
+                    !accountButton.contains(event.target)) {
+                    accountDropdown.classList.remove("show");
+                    accountButton.classList.remove("active");
+                    accountButton.setAttribute("aria-expanded", "false");
+                }
+            });
+        }
+
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener("click", () => {
+                const isOpen = mobileMenu.classList.toggle("show");
+                const icon = mobileMenuButton.querySelector("i");
+
+                mobileMenuButton.setAttribute("aria-expanded", String(isOpen));
+
+                if (icon) {
+                    icon.classList.toggle("fa-bars", !isOpen);
+                    icon.classList.toggle("fa-xmark", isOpen);
+                }
+            });
+
+            mobileMenu.querySelectorAll("a").forEach((link) => {
+                link.addEventListener("click", () => {
+                    mobileMenu.classList.remove("show");
+                    mobileMenuButton.setAttribute("aria-expanded", "false");
+                });
+            });
+        }
+
+        const wait = (milliseconds) => {
+            return new Promise((resolve) => setTimeout(resolve, milliseconds));
+        };
+
+        const heroMainTitle = document.getElementById("heroMainTitle");
+        const changingHeroText = document.getElementById("changingHeroText");
+
+        function createAnimatedLetters(element, value) {
+            if (!element) {
+                return;
+            }
+
+            element.replaceChildren();
+
+            let letterIndex = 0;
+
+            Array.from(value).forEach((character) => {
+                const span = document.createElement("span");
+
+                if (character === " ") {
+                    span.className = "title-space";
+                    span.innerHTML = "&nbsp;";
+                } else {
+                    span.className = "title-letter";
+                    span.textContent = character;
+
+                    span.style.setProperty("--letter-index", letterIndex);
+                    span.style.setProperty(
+                        "--letter-angle",
+                        letterIndex % 2 === 0 ? "-8deg" : "8deg"
+                    );
+
+                    letterIndex++;
+                }
+
+                element.appendChild(span);
+            });
+        }
+
+        function animateLettersIn(element) {
+            if (!element) {
+                return;
+            }
+
+            element.querySelectorAll(".title-letter").forEach((letter) => {
+                letter.classList.remove("title-letter-out");
+                letter.classList.add("title-letter-in");
+            });
+        }
+
+        async function animateLettersOut(element) {
+            if (!element) {
+                return;
+            }
+
+            const letters = Array.from(
+                element.querySelectorAll(".title-letter")
+            );
+
+            letters.forEach((letter) => {
+                letter.classList.remove("title-letter-in");
+                letter.classList.add("title-letter-out");
+            });
+
+            await wait(380 + letters.length * 24);
+        }
+
+        const heroTexts = [
+            "Should Be Shared",
+            "With MealMate"
+        ];
+
+        let currentHeroText = 0;
+        let heroTextChanging = false;
+
+        async function changeHeroText() {
+            if (!changingHeroText || heroTextChanging) {
+                return;
+            }
+
+            heroTextChanging = true;
+
+            await animateLettersOut(changingHeroText);
+
+            currentHeroText = (currentHeroText + 1) % heroTexts.length;
+
+            changingHeroText.classList.toggle(
+                "mealmate-text",
+                currentHeroText === 1
+            );
+
+            createAnimatedLetters(
+                changingHeroText,
+                heroTexts[currentHeroText]
+            );
+
+            await wait(50);
+
+            animateLettersIn(changingHeroText);
+            heroTextChanging = false;
+        }
+
+        function startHomepageSequence() {
+            const reveal = (id, delay) => {
+                setTimeout(() => {
+                    document.getElementById(id)?.classList.add(
+                        "sequence-visible"
+                    );
+                }, delay);
+            };
+
+            reveal("heroTitleReveal", 100);
+            reveal("heroPictureReveal", 1250);
+            reveal("heroEyebrowReveal", 1650);
+            reveal("heroDescriptionReveal", 1900);
+            reveal("heroButtonsReveal", 2200);
+
+            setTimeout(() => animateLettersIn(heroMainTitle), 100);
+            setTimeout(() => animateLettersIn(changingHeroText), 430);
+
+            document.querySelectorAll(".navbar-reveal").forEach((item, index) => {
+                setTimeout(() => {
+                    item.classList.add("navbar-visible");
+                }, 400 + index * 90);
+            });
+
+            setTimeout(() => {
+                setInterval(changeHeroText, 3500);
+            }, 1550);
+        }
+
+        function setupScrollAnimations() {
+            const elements = Array.from(
+                document.querySelectorAll(".scroll-reveal")
+            );
+
+            if (!("IntersectionObserver" in window)) {
+                elements.forEach((element) => {
+                    element.classList.add("scroll-visible");
+                });
+
+                return;
+            }
+
+            const observer = new IntersectionObserver((entries, instance) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("scroll-visible");
+                        instance.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.13,
+                rootMargin: "0px 0px -45px 0px"
+            });
+
+            elements.forEach((element, index) => {
+                element.style.setProperty(
+                    "--scroll-delay",
+                    `${(index % 3) * 90}ms`
+                );
+
+                observer.observe(element);
+            });
+        }
+
+        function flyToTarget(source, target, delay = 0, duration = 900) {
+            if (!source || !target) {
+                return null;
+            }
+
+            const sourceRect = source.getBoundingClientRect();
+            const targetRect = target.getBoundingClientRect();
+
+            if (!sourceRect.width || !targetRect.width) {
+                return null;
+            }
+
+            const moveX = targetRect.left + targetRect.width / 2 -
+                          sourceRect.left - sourceRect.width / 2;
+
+            const moveY = targetRect.top + targetRect.height / 2 -
+                          sourceRect.top - sourceRect.height / 2;
+
+            const scale = Math.min(
+                targetRect.width / sourceRect.width,
+                targetRect.height / sourceRect.height
+            );
+
+            return source.animate([
+                {
+                    opacity: 1,
+                    transform: "translate(0, 0) scale(1)"
+                },
+                {
+                    opacity: 1,
+                    transform: `translate(${moveX * 0.55}px, ${moveY * 0.55}px) scale(${1 - (1 - scale) * 0.55})`
+                },
+                {
+                    opacity: 1,
+                    transform: `translate(${moveX}px, ${moveY}px) scale(${scale})`
+                }
+            ], {
+                delay,
+                duration,
+                fill: "forwards",
+                easing: "cubic-bezier(.22,.61,.36,1)"
+            });
+        }
+
+        window.addEventListener("load", async () => {
+            const intro = document.getElementById("logoIntro");
+            const introLogo = document.getElementById("introLogo");
+
+            const reducedMotion = window.matchMedia(
+                "(prefers-reduced-motion: reduce)"
+            ).matches;
+
+            createAnimatedLetters(heroMainTitle, "Good Food");
+            createAnimatedLetters(changingHeroText, heroTexts[0]);
+
+            setupScrollAnimations();
+
+            if (reducedMotion) {
+                intro?.classList.add("intro-finished");
+
+                document.body.classList.add(
+                    "logo-arrived",
+                    "show-interface"
+                );
+
+                document.body.classList.remove("intro-active");
+
+                document.querySelectorAll(
+                    ".navbar-reveal, .sequence-reveal, .scroll-reveal"
+                ).forEach((element) => {
+                    element.classList.add(
+                        "navbar-visible",
+                        "sequence-visible",
+                        "scroll-visible"
+                    );
+                });
+
+                return;
+            }
+
+            await wait(1500);
+
+            introLogo?.classList.add("letters-finished");
+            intro?.classList.add("logo-moving");
+
+            const animations = [];
+
+            const introIcon = document.getElementById("introLogoIcon");
+            const targetIcon = document.getElementById("targetLogoIcon");
+
+            const iconAnimation = flyToTarget(
+                introIcon,
+                targetIcon,
+                0,
+                920
+            );
+
+            if (iconAnimation) {
+                animations.push(iconAnimation);
+            }
+
+            document.querySelectorAll("[data-intro-letter]").forEach((letter, index) => {
+                const target = document.querySelector(
+                    `[data-target-letter="${index}"]`
+                );
+
+                const animation = flyToTarget(
+                    letter,
+                    target,
+                    70 + index * 66,
+                    900
+                );
+
+                if (animation) {
+                    animations.push(animation);
+                }
+            });
+
+            const taglineAnimation = flyToTarget(
+                document.getElementById("introTagline"),
+                document.getElementById("targetTagline"),
+                680,
+                780
+            );
+
+            if (taglineAnimation) {
+                animations.push(taglineAnimation);
+            }
+
+            await Promise.all(
+                animations.map((animation) => animation.finished.catch(() => null))
+            );
+
+            document.body.classList.add(
+                "logo-arrived",
+                "show-interface"
+            );
+
+            await wait(50);
+
+            intro?.classList.add("intro-finished");
+
+            await wait(260);
+
+            document.body.classList.remove("intro-active");
+
+            startHomepageSequence();
+        });
+    </script>
+
+</body>
+</html>
