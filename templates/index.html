@@ -34,14 +34,14 @@
 
             <div class="intro-logo-text">
                 <span class="intro-brand-name intro-letters">
-                    <span class="intro-letter meal-letter" data-intro-letter="0" style="--i:0;">M</span>
-                    <span class="intro-letter meal-letter" data-intro-letter="1" style="--i:1;">e</span>
-                    <span class="intro-letter meal-letter" data-intro-letter="2" style="--i:2;">a</span>
-                    <span class="intro-letter meal-letter" data-intro-letter="3" style="--i:3;">l</span>
-                    <span class="intro-letter mate-letter" data-intro-letter="4" style="--i:4;">M</span>
-                    <span class="intro-letter mate-letter" data-intro-letter="5" style="--i:5;">a</span>
-                    <span class="intro-letter mate-letter" data-intro-letter="6" style="--i:6;">t</span>
-                    <span class="intro-letter mate-letter" data-intro-letter="7" style="--i:7;">e</span>
+                    <span class="intro-letter meal-letter" data-intro-letter="0">M</span>
+                    <span class="intro-letter meal-letter" data-intro-letter="1">e</span>
+                    <span class="intro-letter meal-letter" data-intro-letter="2">a</span>
+                    <span class="intro-letter meal-letter" data-intro-letter="3">l</span>
+                    <span class="intro-letter mate-letter" data-intro-letter="4">M</span>
+                    <span class="intro-letter mate-letter" data-intro-letter="5">a</span>
+                    <span class="intro-letter mate-letter" data-intro-letter="6">t</span>
+                    <span class="intro-letter mate-letter" data-intro-letter="7">e</span>
                 </span>
 
                 <small id="introTagline">
@@ -83,20 +83,54 @@
             </div>
 
             <div class="account-wrapper navbar-reveal">
-                <button class="account-button" id="accountButton" type="button">
+                <button
+                    class="account-button"
+                    id="accountButton"
+                    type="button"
+                    aria-expanded="false"
+                    aria-controls="accountDropdown"
+                >
                     <i class="fa-solid fa-user"></i>
                     <span>Account / Profile</span>
                     <i class="fa-solid fa-chevron-down arrow" id="accountArrow"></i>
                 </button>
 
                 <div class="account-dropdown" id="accountDropdown">
+
                     <div class="dropdown-heading">
                         <strong>Welcome to MealMate</strong>
-                        <p>
-                            Account registration and sign-in
-                            will be introduced in the next stages.
-                        </p>
+                        <p>Choose how you would like to join our community.</p>
                     </div>
+
+                    <a href="{% url 'signup_user' %}" class="account-option">
+                        <div class="option-icon">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+
+                        <div>
+                            <strong>Food Seeker</strong>
+                            <small>Discover and reserve surplus food</small>
+                        </div>
+
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+
+                    <a
+                        href="{% url 'signup_business' %}"
+                        class="account-option business-option"
+                    >
+                        <div class="option-icon">
+                            <i class="fa-solid fa-store"></i>
+                        </div>
+
+                        <div>
+                            <strong>Food Business</strong>
+                            <small>Share your surplus food</small>
+                        </div>
+
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+
                 </div>
             </div>
 
@@ -106,6 +140,7 @@
                 type="button"
                 aria-label="Open menu"
                 aria-expanded="false"
+                aria-controls="mobileMenu"
             >
                 <i class="fa-solid fa-bars"></i>
             </button>
@@ -116,6 +151,8 @@
             <a href="#services">Our Services</a>
             <a href="#about">About Us</a>
             <a href="#find-food">Home</a>
+            <a href="{% url 'signup_user' %}">Food Seeker Sign Up</a>
+            <a href="{% url 'signup_business' %}">Business Sign Up</a>
         </div>
     </header>
 
@@ -136,18 +173,27 @@
                         </span>
                     </h1>
 
-                    <span class="eyebrow sequence-reveal" id="heroEyebrowReveal">
+                    <span
+                        class="eyebrow sequence-reveal"
+                        id="heroEyebrowReveal"
+                    >
                         LESS FOOD WASTE. STRONGER COMMUNITIES.
                     </span>
 
-                    <p class="hero-description sequence-reveal" id="heroDescriptionReveal">
+                    <p
+                        class="hero-description sequence-reveal"
+                        id="heroDescriptionReveal"
+                    >
                         MealMate connects people with surplus food from local
                         restaurants, cafés and businesses — reducing waste,
                         feeding communities, and building a more sustainable
                         tomorrow.
                     </p>
 
-                    <div class="hero-buttons sequence-reveal" id="heroButtonsReveal">
+                    <div
+                        class="hero-buttons sequence-reveal"
+                        id="heroButtonsReveal"
+                    >
                         <a href="#services" class="primary-button">
                             <i class="fa-solid fa-magnifying-glass"></i>
                             <span>Explore MealMate</span>
@@ -157,7 +203,10 @@
 
                 </div>
 
-                <div class="hero-visual sequence-reveal" id="heroPictureReveal">
+                <div
+                    class="hero-visual sequence-reveal"
+                    id="heroPictureReveal"
+                >
                     <div class="hero-image-wrapper">
                         <img
                             src="{% static 'images/mealmate-hero.png' %}"
@@ -198,6 +247,7 @@
 
                     <div>
                         <h3>Our Intentions</h3>
+
                         <p>
                             To create a community where good food is
                             shared, not wasted.
@@ -212,6 +262,7 @@
 
                     <div>
                         <h3>Our Objectives</h3>
+
                         <p>
                             Reduce food waste, support local communities,
                             and make food more accessible.
@@ -226,6 +277,7 @@
 
                     <div>
                         <h3>Lasting Impact</h3>
+
                         <p>
                             A cleaner environment, stronger communities,
                             and a more sustainable future.
@@ -340,6 +392,7 @@
 
                         <div class="about-stat scroll-reveal">
                             <strong>Less Waste</strong>
+
                             <span>
                                 Food reaches people instead of bins.
                             </span>
@@ -347,6 +400,7 @@
 
                         <div class="about-stat scroll-reveal">
                             <strong>More Access</strong>
+
                             <span>
                                 Users can discover and reserve food nearby.
                             </span>
@@ -412,13 +466,16 @@
                 event.stopPropagation();
 
                 const isOpen = accountDropdown.classList.toggle("show");
+
                 accountButton.classList.toggle("active", isOpen);
                 accountButton.setAttribute("aria-expanded", String(isOpen));
             });
 
             document.addEventListener("click", (event) => {
-                if (!accountDropdown.contains(event.target) &&
-                    !accountButton.contains(event.target)) {
+                if (
+                    !accountDropdown.contains(event.target) &&
+                    !accountButton.contains(event.target)
+                ) {
                     accountDropdown.classList.remove("show");
                     accountButton.classList.remove("active");
                     accountButton.setAttribute("aria-expanded", "false");
@@ -431,7 +488,10 @@
                 const isOpen = mobileMenu.classList.toggle("show");
                 const icon = mobileMenuButton.querySelector("i");
 
-                mobileMenuButton.setAttribute("aria-expanded", String(isOpen));
+                mobileMenuButton.setAttribute(
+                    "aria-expanded",
+                    String(isOpen)
+                );
 
                 if (icon) {
                     icon.classList.toggle("fa-bars", !isOpen);
@@ -442,13 +502,19 @@
             mobileMenu.querySelectorAll("a").forEach((link) => {
                 link.addEventListener("click", () => {
                     mobileMenu.classList.remove("show");
-                    mobileMenuButton.setAttribute("aria-expanded", "false");
+
+                    mobileMenuButton.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
                 });
             });
         }
 
         const wait = (milliseconds) => {
-            return new Promise((resolve) => setTimeout(resolve, milliseconds));
+            return new Promise((resolve) => {
+                setTimeout(resolve, milliseconds);
+            });
         };
 
         const heroMainTitle = document.getElementById("heroMainTitle");
@@ -473,7 +539,11 @@
                     span.className = "title-letter";
                     span.textContent = character;
 
-                    span.style.setProperty("--letter-index", letterIndex);
+                    span.style.setProperty(
+                        "--letter-index",
+                        letterIndex
+                    );
+
                     span.style.setProperty(
                         "--letter-angle",
                         letterIndex % 2 === 0 ? "-8deg" : "8deg"
@@ -546,6 +616,7 @@
             await wait(50);
 
             animateLettersIn(changingHeroText);
+
             heroTextChanging = false;
         }
 
@@ -564,14 +635,21 @@
             reveal("heroDescriptionReveal", 1900);
             reveal("heroButtonsReveal", 2200);
 
-            setTimeout(() => animateLettersIn(heroMainTitle), 100);
-            setTimeout(() => animateLettersIn(changingHeroText), 430);
+            setTimeout(() => {
+                animateLettersIn(heroMainTitle);
+            }, 100);
 
-            document.querySelectorAll(".navbar-reveal").forEach((item, index) => {
-                setTimeout(() => {
-                    item.classList.add("navbar-visible");
-                }, 400 + index * 90);
-            });
+            setTimeout(() => {
+                animateLettersIn(changingHeroText);
+            }, 430);
+
+            document.querySelectorAll(".navbar-reveal").forEach(
+                (item, index) => {
+                    setTimeout(() => {
+                        item.classList.add("navbar-visible");
+                    }, 400 + index * 90);
+                }
+            );
 
             setTimeout(() => {
                 setInterval(changeHeroText, 3500);
@@ -591,17 +669,20 @@
                 return;
             }
 
-            const observer = new IntersectionObserver((entries, instance) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add("scroll-visible");
-                        instance.unobserve(entry.target);
-                    }
-                });
-            }, {
-                threshold: 0.13,
-                rootMargin: "0px 0px -45px 0px"
-            });
+            const observer = new IntersectionObserver(
+                (entries, instance) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add("scroll-visible");
+                            instance.unobserve(entry.target);
+                        }
+                    });
+                },
+                {
+                    threshold: 0.13,
+                    rootMargin: "0px 0px -45px 0px"
+                }
+            );
 
             elements.forEach((element, index) => {
                 element.style.setProperty(
@@ -613,7 +694,12 @@
             });
         }
 
-        function flyToTarget(source, target, delay = 0, duration = 900) {
+        function flyToTarget(
+            source,
+            target,
+            delay = 0,
+            duration = 900
+        ) {
             if (!source || !target) {
                 return null;
             }
@@ -625,48 +711,73 @@
                 return null;
             }
 
-            const moveX = targetRect.left + targetRect.width / 2 -
-                          sourceRect.left - sourceRect.width / 2;
+            const moveX =
+                targetRect.left +
+                targetRect.width / 2 -
+                sourceRect.left -
+                sourceRect.width / 2;
 
-            const moveY = targetRect.top + targetRect.height / 2 -
-                          sourceRect.top - sourceRect.height / 2;
+            const moveY =
+                targetRect.top +
+                targetRect.height / 2 -
+                sourceRect.top -
+                sourceRect.height / 2;
 
             const scale = Math.min(
                 targetRect.width / sourceRect.width,
                 targetRect.height / sourceRect.height
             );
 
-            return source.animate([
+            return source.animate(
+                [
+                    {
+                        opacity: 1,
+                        transform: "translate(0, 0) scale(1)"
+                    },
+                    {
+                        opacity: 1,
+                        transform:
+                            `translate(${moveX * 0.55}px, ${moveY * 0.55}px) ` +
+                            `scale(${1 - (1 - scale) * 0.55})`
+                    },
+                    {
+                        opacity: 1,
+                        transform:
+                            `translate(${moveX}px, ${moveY}px) scale(${scale})`
+                    }
+                ],
                 {
-                    opacity: 1,
-                    transform: "translate(0, 0) scale(1)"
-                },
-                {
-                    opacity: 1,
-                    transform: `translate(${moveX * 0.55}px, ${moveY * 0.55}px) scale(${1 - (1 - scale) * 0.55})`
-                },
-                {
-                    opacity: 1,
-                    transform: `translate(${moveX}px, ${moveY}px) scale(${scale})`
+                    delay,
+                    duration,
+                    fill: "forwards",
+                    easing: "cubic-bezier(.22,.61,.36,1)"
                 }
-            ], {
-                delay,
-                duration,
-                fill: "forwards",
-                easing: "cubic-bezier(.22,.61,.36,1)"
-            });
+            );
         }
 
         window.addEventListener("load", async () => {
             const intro = document.getElementById("logoIntro");
             const introLogo = document.getElementById("introLogo");
 
+            document.querySelectorAll(".intro-letter").forEach(
+                (letter, index) => {
+                    letter.style.setProperty("--i", index);
+                }
+            );
+
             const reducedMotion = window.matchMedia(
                 "(prefers-reduced-motion: reduce)"
             ).matches;
 
-            createAnimatedLetters(heroMainTitle, "Good Food");
-            createAnimatedLetters(changingHeroText, heroTexts[0]);
+            createAnimatedLetters(
+                heroMainTitle,
+                "Good Food"
+            );
+
+            createAnimatedLetters(
+                changingHeroText,
+                heroTexts[0]
+            );
 
             setupScrollAnimations();
 
@@ -714,7 +825,9 @@
                 animations.push(iconAnimation);
             }
 
-            document.querySelectorAll("[data-intro-letter]").forEach((letter, index) => {
+            document.querySelectorAll(
+                "[data-intro-letter]"
+            ).forEach((letter, index) => {
                 const target = document.querySelector(
                     `[data-target-letter="${index}"]`
                 );
@@ -743,7 +856,9 @@
             }
 
             await Promise.all(
-                animations.map((animation) => animation.finished.catch(() => null))
+                animations.map((animation) => {
+                    return animation.finished.catch(() => null);
+                })
             );
 
             document.body.classList.add(

@@ -1,0 +1,67 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Registration Successful | MealMate</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    >
+
+    <link rel="stylesheet" href="{% static 'auth.css' %}">
+</head>
+
+<body class="auth-page">
+
+    <a href="{% url 'home' %}" class="auth-brand">
+        <i class="fa-solid fa-leaf"></i>
+        <span><b>Meal</b>Mate</span>
+    </a>
+
+    <main class="auth-shell">
+
+        <section class="auth-card success-card">
+
+            <div class="auth-icon success-icon">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+
+            <p class="auth-kicker">
+                REGISTRATION COMPLETE
+            </p>
+
+            <h1>Account Created!</h1>
+
+            <p class="auth-subtitle">
+                Your MealMate account has been registered successfully.
+            </p>
+
+            <p class="auth-subtitle">
+                Sign-in functionality will be added in the next
+                development stage.
+            </p>
+
+            <a href="{% url 'home' %}" class="auth-submit">
+                <span>Return to Homepage</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+        </section>
+
+    </main>
+
+</body>
+</html>
