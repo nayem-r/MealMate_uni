@@ -28,6 +28,7 @@
 
     <div class="logo-intro" id="logoIntro">
         <div class="intro-logo" id="introLogo">
+
             <div class="intro-logo-icon" id="introLogoIcon">
                 <i class="fa-solid fa-leaf"></i>
             </div>
@@ -48,6 +49,7 @@
                     Good Food. Brighter Tomorrows.
                 </small>
             </div>
+
         </div>
     </div>
 
@@ -83,6 +85,7 @@
             </div>
 
             <div class="account-wrapper navbar-reveal">
+
                 <button
                     class="account-button"
                     id="accountButton"
@@ -91,45 +94,118 @@
                     aria-controls="accountDropdown"
                 >
                     <i class="fa-solid fa-user"></i>
-                    <span>Account / Profile</span>
-                    <i class="fa-solid fa-chevron-down arrow" id="accountArrow"></i>
+
+                    <span>
+                        {% if current_user %}
+                            {{ current_user.full_name }}
+                        {% else %}
+                            Account / Profile
+                        {% endif %}
+                    </span>
+
+                    <i
+                        class="fa-solid fa-chevron-down arrow"
+                        id="accountArrow"
+                    ></i>
                 </button>
 
                 <div class="account-dropdown" id="accountDropdown">
 
-                    <div class="dropdown-heading">
-                        <strong>Welcome to MealMate</strong>
-                        <p>Choose how you would like to join our community.</p>
-                    </div>
+                    {% if current_user %}
 
-                    <a href="{% url 'signup_user' %}" class="account-option">
-                        <div class="option-icon">
-                            <i class="fa-solid fa-user"></i>
+                        <div class="dropdown-heading">
+                            <strong>{{ current_user.full_name }}</strong>
+
+                            <p>
+                                {{ current_user.email }}
+                            </p>
+
+                            <p>
+                                {% if current_user.role == "business" %}
+                                    Food Business Account
+                                {% else %}
+                                    Food Seeker Account
+                                {% endif %}
+                            </p>
                         </div>
 
-                        <div>
-                            <strong>Food Seeker</strong>
-                            <small>Discover and reserve surplus food</small>
+                        <form
+                            method="POST"
+                            action="{% url 'logout' %}"
+                            class="home-logout-form"
+                        >
+                            {% csrf_token %}
+
+                            <button
+                                type="submit"
+                                class="home-logout-button"
+                            >
+                                <i class="fa-solid fa-right-from-bracket"></i>
+                                Log Out
+                            </button>
+                        </form>
+
+                    {% else %}
+
+                        <div class="dropdown-heading">
+                            <strong>Welcome to MealMate</strong>
+
+                            <p>
+                                Sign in or create an account to join
+                                our food-sharing community.
+                            </p>
                         </div>
 
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </a>
+                        <a href="{% url 'login' %}" class="login-option">
+                            <div class="option-icon login-icon">
+                                <i class="fa-solid fa-right-to-bracket"></i>
+                            </div>
 
-                    <a
-                        href="{% url 'signup_business' %}"
-                        class="account-option business-option"
-                    >
-                        <div class="option-icon">
-                            <i class="fa-solid fa-store"></i>
+                            <div>
+                                <strong>Sign In</strong>
+                                <small>Access your MealMate account</small>
+                            </div>
+
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+
+                        <div class="dropdown-divider">
+                            New to MealMate?
                         </div>
 
-                        <div>
-                            <strong>Food Business</strong>
-                            <small>Share your surplus food</small>
-                        </div>
+                        <a
+                            href="{% url 'signup_user' %}"
+                            class="account-option"
+                        >
+                            <div class="option-icon">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
 
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </a>
+                            <div>
+                                <strong>Food Seeker</strong>
+                                <small>Discover and reserve surplus food</small>
+                            </div>
+
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+
+                        <a
+                            href="{% url 'signup_business' %}"
+                            class="account-option business-option"
+                        >
+                            <div class="option-icon">
+                                <i class="fa-solid fa-store"></i>
+                            </div>
+
+                            <div>
+                                <strong>Food Business</strong>
+                                <small>Share your surplus food</small>
+                            </div>
+
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+
+                    {% endif %}
 
                 </div>
             </div>
@@ -151,8 +227,37 @@
             <a href="#services">Our Services</a>
             <a href="#about">About Us</a>
             <a href="#find-food">Home</a>
-            <a href="{% url 'signup_user' %}">Food Seeker Sign Up</a>
-            <a href="{% url 'signup_business' %}">Business Sign Up</a>
+
+            {% if current_user %}
+
+                <form
+                    method="POST"
+                    action="{% url 'logout' %}"
+                    class="mobile-logout-form"
+                >
+                    {% csrf_token %}
+
+                    <button type="submit">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        Log Out
+                    </button>
+                </form>
+
+            {% else %}
+
+                <a href="{% url 'login' %}">
+                    Sign In
+                </a>
+
+                <a href="{% url 'signup_user' %}">
+                    Food Seeker Sign Up
+                </a>
+
+                <a href="{% url 'signup_business' %}">
+                    Business Sign Up
+                </a>
+
+            {% endif %}
         </div>
     </header>
 
@@ -163,12 +268,21 @@
 
                 <div class="hero-text">
 
-                    <h1 class="sequence-reveal" id="heroTitleReveal">
-                        <span class="hero-title-line" id="heroMainTitle">
+                    <h1
+                        class="sequence-reveal"
+                        id="heroTitleReveal"
+                    >
+                        <span
+                            class="hero-title-line"
+                            id="heroMainTitle"
+                        >
                             Good Food
                         </span>
 
-                        <span class="changing-text" id="changingHeroText">
+                        <span
+                            class="changing-text"
+                            id="changingHeroText"
+                        >
                             Should Be Shared
                         </span>
                     </h1>
@@ -468,7 +582,11 @@
                 const isOpen = accountDropdown.classList.toggle("show");
 
                 accountButton.classList.toggle("active", isOpen);
-                accountButton.setAttribute("aria-expanded", String(isOpen));
+
+                accountButton.setAttribute(
+                    "aria-expanded",
+                    String(isOpen)
+                );
             });
 
             document.addEventListener("click", (event) => {
@@ -478,7 +596,11 @@
                 ) {
                     accountDropdown.classList.remove("show");
                     accountButton.classList.remove("active");
-                    accountButton.setAttribute("aria-expanded", "false");
+
+                    accountButton.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
                 }
             });
         }
@@ -512,9 +634,7 @@
         }
 
         const wait = (milliseconds) => {
-            return new Promise((resolve) => {
-                setTimeout(resolve, milliseconds);
-            });
+            return new Promise((resolve) => setTimeout(resolve, milliseconds));
         };
 
         const heroMainTitle = document.getElementById("heroMainTitle");
@@ -635,21 +755,14 @@
             reveal("heroDescriptionReveal", 1900);
             reveal("heroButtonsReveal", 2200);
 
-            setTimeout(() => {
-                animateLettersIn(heroMainTitle);
-            }, 100);
+            setTimeout(() => animateLettersIn(heroMainTitle), 100);
+            setTimeout(() => animateLettersIn(changingHeroText), 430);
 
-            setTimeout(() => {
-                animateLettersIn(changingHeroText);
-            }, 430);
-
-            document.querySelectorAll(".navbar-reveal").forEach(
-                (item, index) => {
-                    setTimeout(() => {
-                        item.classList.add("navbar-visible");
-                    }, 400 + index * 90);
-                }
-            );
+            document.querySelectorAll(".navbar-reveal").forEach((item, index) => {
+                setTimeout(() => {
+                    item.classList.add("navbar-visible");
+                }, 400 + index * 90);
+            });
 
             setTimeout(() => {
                 setInterval(changeHeroText, 3500);
@@ -694,12 +807,7 @@
             });
         }
 
-        function flyToTarget(
-            source,
-            target,
-            delay = 0,
-            duration = 900
-        ) {
+        function flyToTarget(source, target, delay = 0, duration = 900) {
             if (!source || !target) {
                 return null;
             }
@@ -769,15 +877,8 @@
                 "(prefers-reduced-motion: reduce)"
             ).matches;
 
-            createAnimatedLetters(
-                heroMainTitle,
-                "Good Food"
-            );
-
-            createAnimatedLetters(
-                changingHeroText,
-                heroTexts[0]
-            );
+            createAnimatedLetters(heroMainTitle, "Good Food");
+            createAnimatedLetters(changingHeroText, heroTexts[0]);
 
             setupScrollAnimations();
 
@@ -825,24 +926,24 @@
                 animations.push(iconAnimation);
             }
 
-            document.querySelectorAll(
-                "[data-intro-letter]"
-            ).forEach((letter, index) => {
-                const target = document.querySelector(
-                    `[data-target-letter="${index}"]`
-                );
+            document.querySelectorAll("[data-intro-letter]").forEach(
+                (letter, index) => {
+                    const target = document.querySelector(
+                        `[data-target-letter="${index}"]`
+                    );
 
-                const animation = flyToTarget(
-                    letter,
-                    target,
-                    70 + index * 66,
-                    900
-                );
+                    const animation = flyToTarget(
+                        letter,
+                        target,
+                        70 + index * 66,
+                        900
+                    );
 
-                if (animation) {
-                    animations.push(animation);
+                    if (animation) {
+                        animations.push(animation);
+                    }
                 }
-            });
+            );
 
             const taglineAnimation = flyToTarget(
                 document.getElementById("introTagline"),
